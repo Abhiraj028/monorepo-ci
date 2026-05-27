@@ -15,6 +15,7 @@ jobs:
           chmod 600 ~/ssh_key
           ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@18.212.220.61 << 'EOF'
             cd monorepo-ci
+            npm install -g pnpm
             git pull origin main
             pnpm install
             pnpm run build
