@@ -1,0 +1,25 @@
+{
+  "name": "ws-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "pnpm --filter @repo/db build",
+    "build": "tsc -b",
+    "start": "node --env-file=../../packages/prisma/.env dist/index.js",
+    "dev": "pnpm build && pnpm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@repo/db":"workspace:*",
+    "@repo/typescript-config":"workspace:*"
+  },
+  "dependencies": {
+    "ws": "^8.13.0",
+    "@types/ws": "^8.5.3"
+  }
+}
