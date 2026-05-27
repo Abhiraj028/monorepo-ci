@@ -14,6 +14,8 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
           chmod 600 ~/ssh_key
           ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@18.212.220.61 << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd monorepo-ci
             npm install -g pnpm
             git pull origin main
