@@ -1,0 +1,22 @@
+name: Deploy to staging
+
+on: 
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy:
+    name: Deploy eveyrthing to staging cluster
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@18.212.220.61 << 'EOF'
+            cd monorepo-ci
+            git pull origin main
+            pnpm install
+            pnpm run build
+            pm2 restart all
+          EOF
